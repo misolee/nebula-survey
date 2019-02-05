@@ -6,7 +6,7 @@
     <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
       {{ answer.answer }}: {{ answer.response }}
     </li>
-    <router-link to="/">Back to Home</router-link>
+    <router-link to="/">Back</router-link>
   </div>
 </template>
 

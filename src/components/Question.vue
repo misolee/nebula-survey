@@ -1,7 +1,7 @@
 <template>
   <div id="question">
     <h3>Question</h3>
-    <form>
+    <form @submit.prevent="submitSurveyForm">
       Question: {{ this.question }}
       <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
         {{ answer.answer }}
@@ -40,6 +40,20 @@ export default {
         this.answers = question.data().answers
       }
     )
+  },
+  methods: {
+    submitSurveyForm() {
+      db.collection('survey-questions').where('question_id', '==', to.params.question_id).get().then(
+        question => question.forEach(doc => {
+          next(vm => {
+            vm.question_id = doc.data().question_id
+            vm.question = doc.data().question
+            vm.total_response = doc.data().total_response
+            vm.answers = doc.data().answers
+          })
+        })
+      )
+    }
   }
 }
 </script>
