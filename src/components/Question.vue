@@ -3,7 +3,12 @@
     <h3>Question</h3>
     <form>
       Question: {{ this.question }}
-      <li v-for="answer in this.answers" v-bind:key="answer.answer_id">{{answer.answer}}</li>
+      <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
+        {{ answer.answer }}
+      </li>
+      <router-link v-if="this.question_id" v-bind:to="{ name: 'stats', params: { question_id: this.question_id }}">
+        <input type="submit" value="Submit">
+      </router-link>
     </form>
   </div>
 </template>
