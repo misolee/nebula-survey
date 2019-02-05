@@ -2,9 +2,9 @@
   <div id="stats">
     <h3>Stats</h3>
     {{ this.question }}
-    Total Responses: {{ this.total_response + 10 }}
+    Total Responses: {{ this.total_response }}
     <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
-      {{ answer.answer }}: {{ answer.response }}
+      {{ answer.answer }} Count: {{ answer.response }} Percentage: {{ percentage(answer.response) }}%
     </li>
     <router-link to="/">Back</router-link>
   </div>
@@ -18,7 +18,7 @@ export default {
     return {
       question_id: null,
       question: null,
-      total_response: 10,
+      total_response: null,
       answers: null
     }
   },
@@ -34,14 +34,16 @@ export default {
       })
     )
   },
-  // watch: {
-  //   '$route': 'fetchData'
-  // },
-  // methods: {
-  //   fetchData() {
-  //     db.collection('survey-questions').where('question_id', '==', this.$route.params.question_id)
-  //       .get().then()
-  //   }
-  // }
+  methods: {
+    percentage(count) {
+      return Math.floor((count/this.total_response) * 100)
+    }
+  }
 }
 </script>
+
+<style scoped>
+  li {
+    list-style: none;
+  }
+</style>

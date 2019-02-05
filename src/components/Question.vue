@@ -3,12 +3,16 @@
     <h3>Question</h3>
     <form @submit.prevent="submitSurveyForm">
       Question: {{ this.question }}
-      <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
-        {{ answer.answer }}
-      </li>
-      <router-link v-if="this.question_id" v-bind:to="{ name: 'stats', params: { question_id: this.question_id }}">
-        <input type="submit" value="Submit">
-      </router-link>
+      <div v-for="answer in this.answers" v-bind:key="answer.answer_id">
+        <input type="radio" v-bind:id="answer.answer_id" v-bind:value="answer" v-model="picked">
+        <label for="one">{{ answer.answer }}</label>
+      </div>
+
+      <!-- <span>picked: {{ this.picked }}</span> -->
+
+      <!-- {{ this.total_response }} -->
+
+      <input type="submit" value="Submit">
     </form>
   </div>
 </template>
@@ -23,7 +27,8 @@ export default {
       question_id: null,
       question: null,
       total_response: null,
-      answers: null
+      answers: null,
+      picked: null
     }
   },
   created() {
@@ -43,16 +48,19 @@ export default {
   },
   methods: {
     submitSurveyForm() {
-      db.collection('survey-questions').where('question_id', '==', to.params.question_id).get().then(
-        question => question.forEach(doc => {
-          next(vm => {
-            vm.question_id = doc.data().question_id
-            vm.question = doc.data().question
-            vm.total_response = doc.data().total_response
-            vm.answers = doc.data().answers
+      db.collection('survey-questions').where('question_id', '==', this.question_id).get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            this.answers[this.picked.answer_id].response++
+            doc.ref.update({
+              total_response: this.total_response + 1,
+              answers: this.answers
+            })
           })
         })
-      )
+        .then(() => {
+          this.$router.push({ name: 'stats', params: { question_id: this.question_id }})
+        })
     }
   }
 }
