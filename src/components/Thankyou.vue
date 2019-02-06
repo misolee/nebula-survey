@@ -28,8 +28,8 @@
   }
 
   .thank-you {
-    font-size: 60px;
-    margin-top: 200px;
+    font-size: 55px;
+    margin-top: 140px;
   }
 
   .stats-button {

@@ -79,7 +79,7 @@ export default {
   .question-answers {
     border-radius: 5px;
     padding: 20px;
-    margin-top: 100px;
+    margin-top: 75px;
   }
 
   .question {

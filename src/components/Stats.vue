@@ -4,7 +4,6 @@
       <div class="stats-header">Stats</div>
       <div class="question-response-count">
         <div class="question">{{ this.question }}</div>
-        <div class="total-response">Total Responses: <strong>{{ this.total_response }}</strong></div>
       </div>
       <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
         <div class="answer-response">
@@ -17,6 +16,10 @@
           </div>
         </div>
       </li>
+      <div class="total-response">
+        <div>
+          Total Responses: <strong>{{ this.total_response }}</strong></div>
+        </div>
       <router-link to="/" class="back-button">
         <div class="back">Back</div>
       </router-link>
@@ -69,7 +72,7 @@ export default {
     flex-direction: column;
     border-radius: 5px;
     padding: 20px;
-    margin-top: 50px;
+    margin-top: 10px;
   }
 
   .stats-header {
@@ -82,9 +85,9 @@ export default {
   .question-response-count {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
-    font-size: 25px;
-    margin-left: 5px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    justify-content: center;
   }
 
   .question {
@@ -125,6 +128,12 @@ export default {
   .percentage {
     text-align: center;
     color: white;
+  }
+
+  .total-response {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
   }
 
   .back-button {
