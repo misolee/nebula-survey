@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
-    <div>
+    <div class="router-view">
       <router-view/>
     </div>
   </div>
@@ -16,3 +16,15 @@ export default {
   }
 }
 </script>
+
+<style>
+  #app {
+    height: 100vh;
+  }
+
+  .router-view {
+    background-image: url("./assets/background.png");
+    background-size: cover;
+    height: 100vh;
+  }
+</style>

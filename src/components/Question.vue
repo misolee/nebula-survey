@@ -1,18 +1,20 @@
 <template>
-  <div id="question">
-    <h3>Question</h3>
-    <form @submit.prevent="submitSurveyForm">
-      Question: {{ this.question }}
-      <div v-for="answer in this.answers" v-bind:key="answer.answer_id">
-        <input type="radio" v-bind:id="answer.answer_id" v-bind:value="answer" v-model="picked">
-        <label for="one">{{ answer.answer }}</label>
+  <div class="question-page">
+    <form @submit.prevent="submitSurveyForm" class="question-answers">
+      <div class="question">
+        <strong>
+          {{ this.question }}
+        </strong>
       </div>
-
-      <!-- <span>picked: {{ this.picked }}</span> -->
-
-      <!-- {{ this.total_response }} -->
-
-      <input type="submit" value="Submit">
+      <div class="answer-choices">
+        <div class="answers" v-for="answer in this.answers" v-bind:key="answer.answer_id">
+          <input type="radio" v-bind:id="answer.answer_id" v-bind:value="answer" v-model="picked">
+          <label v-bind:for="answer.answer_id">{{ answer.answer }}</label>
+        </div>
+      </div>
+      <div class="submit-button">
+        <input class="submit" type="submit" value="Submit">
+      </div>
     </form>
   </div>
 </template>
@@ -65,3 +67,91 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .question-page {
+    display: flex;
+    flex-direction: column;
+    margin: 0 350px;
+    font-size: 25px;
+  }
+
+  .question-answers {
+    border-radius: 5px;
+    /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.18); */
+    padding: 20px;
+    margin-top: 100px;
+  }
+
+  .question {
+    margin: 20px 20px;
+    text-align: center;
+  }
+
+  .answer-choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .answers {
+    display: flex;
+    margin: 5px 0;
+  }
+
+  label {
+    /* background: #fff; */
+    /* border: 1px solid #ddd; */
+    padding: .5rem 1.25rem;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #444;
+    transition: box-shadow 400ms ease;
+  }
+
+  label:hover {
+    background: #1DA1F3;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type="radio"]:checked + label {
+    background: #3E4CEC;
+    color: white;
+  }
+
+  .submit-button {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  input.submit {
+    background-color: #3EC889;
+    height: 50px;
+    width: 200px;
+    margin: 0 auto;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: 0 0px 0 0px rgba(0, 0, 0, 0), 0 6px 10px 0px rgba(0, 0, 0, 0.19);
+  }
+
+  input.submit:hover {
+    background-color: #2BD5C6;
+    cursor: pointer;
+  }
+
+  input.submit:focus {
+    outline: none;
+  }
+
+  input.submit:active {
+    outline: none;
+    box-shadow: none;
+  }
+</style>
