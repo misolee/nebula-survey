@@ -69,7 +69,7 @@ export default {
     flex-direction: column;
     border-radius: 5px;
     padding: 20px;
-    margin-top: 30px;
+    margin-top: 50px;
   }
 
   .stats-header {
@@ -82,8 +82,9 @@ export default {
   .question-response-count {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 25px;
+    margin-left: 5px;
   }
 
   .question {

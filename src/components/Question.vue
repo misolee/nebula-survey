@@ -61,7 +61,7 @@ export default {
           })
         })
         .then(() => {
-          this.$router.push({ name: 'stats', params: { question_id: this.question_id }})
+          this.$router.push({ name: 'thankyou', params: { question_id: this.question_id }})
         })
     }
   }
@@ -78,7 +78,6 @@ export default {
 
   .question-answers {
     border-radius: 5px;
-    /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.18); */
     padding: 20px;
     margin-top: 100px;
   }
@@ -100,19 +99,19 @@ export default {
   }
 
   label {
-    /* background: #fff; */
-    /* border: 1px solid #ddd; */
     padding: .5rem 1.25rem;
     border-radius: 10px;
     cursor: pointer;
     color: #444;
     transition: box-shadow 400ms ease;
+    font-size: 20px;
   }
 
   label:hover {
     background: #1DA1F3;
     color: white;
     cursor: pointer;
+    box-shadow: 0 0px 0 0px rgba(0, 0, 0, 0), 0 6px 10px 0px rgba(0, 0, 0, 0.19);
   }
 
   input[type="radio"] {
@@ -122,6 +121,7 @@ export default {
   input[type="radio"]:checked + label {
     background: #3E4CEC;
     color: white;
+    box-shadow: 0 0px 0 0px rgba(0, 0, 0, 0), 0 6px 10px 0px rgba(0, 0, 0, 0.19);
   }
 
   .submit-button {
@@ -139,11 +139,14 @@ export default {
     border-radius: 10px;
     font-size: 20px;
     box-shadow: 0 0px 0 0px rgba(0, 0, 0, 0), 0 6px 10px 0px rgba(0, 0, 0, 0.19);
+    transition: 0.5s;
+    border: none;
   }
 
   input.submit:hover {
     background-color: #2BD5C6;
     cursor: pointer;
+    border-radius: 30px;
   }
 
   input.submit:focus {
@@ -152,6 +155,6 @@ export default {
 
   input.submit:active {
     outline: none;
-    box-shadow: none;
+    border: none;
   }
 </style>

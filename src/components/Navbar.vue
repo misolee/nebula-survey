@@ -25,6 +25,7 @@
     font-size: 40px;
     font-weight: 700;
     color: #0C1149;
+    margin-right: 100px;
   }
 
   img {

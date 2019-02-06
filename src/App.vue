@@ -25,6 +25,6 @@ export default {
   .router-view {
     background-image: url("./assets/background.png");
     background-size: cover;
-    height: 100vh;
+    height: Calc(100vh - 105px);
   }
 </style>
