@@ -26,5 +26,6 @@ export default {
     background-image: url("./assets/background.png");
     background-size: cover;
     height: Calc(100vh - 105px);
+    min-width: 1227px;
   }
 </style>

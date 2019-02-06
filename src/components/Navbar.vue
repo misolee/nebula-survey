@@ -19,6 +19,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    min-width: 1227px;
   }
 
   .navbar-line {
@@ -26,6 +27,7 @@
     font-weight: 700;
     color: #0C1149;
     margin-right: 100px;
+    min-width: 657px;
   }
 
   img {

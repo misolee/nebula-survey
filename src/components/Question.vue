@@ -4,7 +4,7 @@
     <form @submit.prevent="submitSurveyForm" class="question-answers">
 
       <div class="question">
-        <strong>{{ this.question }}</strong>
+        {{ this.question }}
       </div>
 
       <div class="answer-choices">
@@ -96,6 +96,7 @@ export default {
   .question {
     margin: 20px 20px;
     text-align: center;
+    font-weight: bold;
   }
 
   .answer-choices {

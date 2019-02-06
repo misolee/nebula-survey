@@ -44,18 +44,21 @@ export default {
     font-size: 70px;
     font-weight: bold;
     margin-bottom: 20px;
+    /* min-width: 495px; */
   }
 
   .front-page-sentences {
     margin: 5px 0;
     font-size: 18px;
     color: #515584;
+    /* min-width: 495px; */
   }
 
   .instructions {
     font-weight: bold;
     font-size: 22px;
     margin: 40px 0 10px 0;
+    /* min-width: 495px; */
   }
 
   .start-button {
