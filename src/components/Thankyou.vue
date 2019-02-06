@@ -15,6 +15,7 @@
       }
     },
     created() {
+      // set question_id from the url to route to result page
       this.question_id = this.$route.params.question_id
     }
   }

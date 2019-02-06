@@ -5,21 +5,28 @@
       <div class="question-response-count">
         <div class="question">{{ this.question }}</div>
       </div>
+
       <li v-for="answer in this.answers" v-bind:key="answer.answer_id">
         <div class="answer-response">
           <div>{{ answer.answer }}</div>
           <div>Count: <strong>{{ answer.response }}</strong></div>
         </div>
+
+        <!-- bar animation -->
         <div class="full-bar">
           <div class="percentage-bar" :style="{ width: percentage(answer.response)+ '%' }">
             <div class="percentage">{{ percentage(answer.response) }}%</div>
           </div>
         </div>
       </li>
+
       <div class="total-response">
         <div>
-          Total Responses: <strong>{{ this.total_response }}</strong></div>
+          Total Responses: <strong>{{ this.total_response }}</strong>
         </div>
+      </div>
+
+      <!-- re-route to home -->
       <router-link to="/" class="back-button">
         <div class="back">Back</div>
       </router-link>
@@ -39,21 +46,30 @@ export default {
       answers: null
     }
   },
+
+  // called before the route that renders this component is confirmed
+  // in React => componentDidMount
   beforeRouteEnter (to, from, next) {
-    db.collection('survey-questions').where('question_id', '==', to.params.question_id).get().then(
-      question => question.forEach(doc => {
+    db.collection('survey-questions')
+    .where('question_id', '==', to.params.question_id)
+    .get()
+    .then(question => {
+      question.forEach(doc => {
+        // access to component instance via `vm`
         next(vm => {
-          vm.question_id = doc.data().question_id
-          vm.question = doc.data().question
-          vm.total_response = doc.data().total_response
-          vm.answers = doc.data().answers
+          let { question_id, question, total_response, answers } = doc.data()
+
+          vm.question_id = question_id
+          vm.question = question
+          vm.total_response = total_response
+          vm.answers = answers
         })
       })
-    )
+    })
   },
   methods: {
     percentage(count) {
-      return Math.floor((count/this.total_response) * 100)
+      return Math.floor((count / this.total_response) * 100)
     }
   }
 }
@@ -121,6 +137,7 @@ export default {
     animation: percentage 1.5s ease-out;
   }
 
+  /* percent animation */
   @keyframes percentage {
     0% { width: 0% }
   }

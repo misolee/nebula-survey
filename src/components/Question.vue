@@ -1,20 +1,24 @@
 <template>
   <div class="question-page">
+    <!-- submitSurvey function on submit -->
     <form @submit.prevent="submitSurveyForm" class="question-answers">
+
       <div class="question">
-        <strong>
-          {{ this.question }}
-        </strong>
+        <strong>{{ this.question }}</strong>
       </div>
+
       <div class="answer-choices">
+        <!-- v-for: loop through answers array, v-bind:key: to have unique key -->
         <div class="answers" v-for="answer in this.answers" v-bind:key="answer.answer_id">
           <input type="radio" v-bind:id="answer.answer_id" v-bind:value="answer" v-model="picked">
           <label v-bind:for="answer.answer_id">{{ answer.answer }}</label>
         </div>
       </div>
+
       <div class="submit-button">
         <input class="submit" type="submit" value="Submit">
       </div>
+
     </form>
   </div>
 </template>
@@ -34,13 +38,15 @@ export default {
     }
   },
   created() {
+    // get random question from db
     let numberOfQuestions = 2;
-    let randomQuestion = Math.floor(Math.random() * numberOfQuestions); // get random question from db
+    let randomQuestion = Math.floor(Math.random() * numberOfQuestions);
 
     db.collection('survey-questions').get().then(
       questions => {
+        // set random question in the constructor
         const question = questions.docs[randomQuestion]
-        this.id = question.id // set random question as the constructor
+        this.id = question.id
         this.question_id = question.data().question_id
         this.question = question.data().question
         this.total_response = question.data().total_response
@@ -50,19 +56,24 @@ export default {
   },
   methods: {
     submitSurveyForm() {
-      db.collection('survey-questions').where('question_id', '==', this.question_id).get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            this.answers[this.picked.answer_id].response++
-            doc.ref.update({
-              total_response: this.total_response + 1,
-              answers: this.answers
-            })
+      db.collection('survey-questions')
+      .where('question_id', '==', this.question_id)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          // increase answer response count
+          this.answers[this.picked.answer_id].response++
+          doc.ref.update({
+            // update answers and reset
+            total_response: this.total_response + 1,
+            answers: this.answers
           })
         })
-        .then(() => {
-          this.$router.push({ name: 'thankyou', params: { question_id: this.question_id }})
-        })
+      })
+      .then(() => {
+        // re-route to thank you page
+        this.$router.push({ name: 'thankyou', params: { question_id: this.question_id }})
+      })
     }
   }
 }
