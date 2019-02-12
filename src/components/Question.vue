@@ -11,12 +11,12 @@
         <!-- v-for: loop through answers array, v-bind:key: to have unique key -->
         <div class="answers" v-for="answer in this.answers" v-bind:key="answer.answer_id">
           <input type="radio" v-bind:id="answer.answer_id" v-bind:value="answer" v-model="picked">
-          <label v-bind:for="answer.answer_id">{{ answer.answer }}</label>
+          <label v-bind:for="answer.answer_id"><i class="fas fa-check-circle"></i>{{ answer.answer }}</label>
         </div>
       </div>
 
       <div class="submit-button">
-        <input class="submit" type="submit" value="Submit">
+        <input class="submit" type="submit" value="Continue">
       </div>
 
     </form>
@@ -91,6 +91,12 @@ export default {
     border-radius: 5px;
     padding: 20px;
     margin-top: 75px;
+    background-color: #E2E3EC;
+  }
+
+  .fa-check-circle {
+    color: #E2E3EC;
+    margin-right: 15px;
   }
 
   .question {
@@ -99,24 +105,45 @@ export default {
     font-weight: bold;
   }
 
+  .answer-div {
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    justify-content: center;
+    flex-direction: column;
+    height: 80px;
+    width: 330px;
+    margin: 0 10px;
+  }
+
   .answer-choices {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .answers {
     display: flex;
-    margin: 5px 0;
+    margin: 5px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    flex-direction: column;
+    height: 80px;
+    width: 330px;
   }
 
   label {
-    padding: .5rem 1.25rem;
+    background-color: white;
     border-radius: 10px;
     cursor: pointer;
     color: #444;
     transition: box-shadow 400ms ease;
     font-size: 20px;
+    height: 80px;
+    line-height: 80px;
+    padding: 0 20px;
   }
 
   label:hover {
@@ -143,7 +170,7 @@ export default {
   }
 
   input.submit {
-    background-color: #3EC889;
+    background-color: #C1C6EA;
     height: 50px;
     width: 200px;
     margin: 0 auto;
